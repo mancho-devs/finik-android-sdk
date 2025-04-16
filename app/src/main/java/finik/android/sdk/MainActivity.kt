@@ -1,56 +1,46 @@
 package finik.android.sdk
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import kg.mancho.finik_android_sdk.FinikActivity
 
 class MainActivity : AppCompatActivity() {
 
-    // private val paymentReceiver = object : BroadcastReceiver() {
-    //     override fun onReceive(context: Context?, intent: Intent?) {
-    //         val action = intent?.action ?: return
-    //         when (action) {
-    //             "finik_paymentSuccess" -> {
-    //                 val data = intent.getStringExtra("data") ?: ""
-    //                 Log.d("MainActivity", "Payment success: $data")
-    //             }
-    //             "finik_paymentFailure" -> {
-    //                 val error = intent.getStringExtra("error") ?: ""
-    //                 Log.e("MainActivity", "Payment failed: $error")
-    //             }
-    //             "finik_onBackPressed" -> {
-    //                 Log.d("MainActivity", "FinikActivity закрыта")
-    //             }
-    //         }
-    //     }
-    // }
+    private val finikLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val data = result.data
+                val resultValue = data?.getStringExtra("paymentResult")
+                val details = data?.getStringExtra("details")
+                // Обработка success
+            } else {
+                val isBackPressed = result.data?.getStringExtra("isBackPressed") == "true"
+
+                if (isBackPressed) {
+                    Log.d("MainActivity", "Пользователь вышел из Finik по кнопке назад")
+                    // Обработка кнопки назад
+                } else {
+                    val data = result.data
+                    val resultValue = data?.getStringExtra("paymentResult")
+                    val details = data?.getStringExtra("details")
+                    // Обработка failure
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Регистрируем приёмник
-        // registerReceiver(paymentReceiver, IntentFilter().apply {
-        //     addAction("finik_paymentSuccess")
-        //     addAction("finik_paymentFailure")
-        //     addAction("finik_onBackPressed")
-        // })
 
         // Запуск FinikActivity из твоей SDK
         val intent = Intent(this, FinikActivity::class.java).apply {
             putExtra("apiKey", "da2-qtfmf4xkzjeypiexb75aqxtn6u")
             putExtra("locale", "ru")
-            putExtra("useHive", true)
+            putExtra("useHive", false)
         }
 
-        startActivity(intent)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        // unregisterReceiver(paymentReceiver)
+        finikLauncher.launch(intent)
     }
 }

@@ -23,5 +23,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "FinikAndroidSdk"
 include(":app")
+include(":finik-android-sdk")
 include(":flutter_module")
 
