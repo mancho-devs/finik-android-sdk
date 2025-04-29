@@ -43,7 +43,7 @@ android {
 afterEvaluate {
     tasks.named("extractDeepLinksDebug").configure {
         dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseDebug")
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
+//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
     }
     tasks.named("extractDeepLinksRelease") {
         dependsOn("explodeSdk.finik.flutter_moduleFlutter-release.aarRelease")
@@ -115,7 +115,7 @@ afterEvaluate {
 //}
 
 dependencies {
-    embed("sdk.finik.flutter_module:flutter_debug:1.0")
+//    embed("sdk.finik.flutter_module:flutter_debug:1.0")
     embed("sdk.finik.flutter_module:flutter_release:1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
