@@ -12,17 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinikAndroidSdk"
         tools:targetApi="31">
-        <activity
-            android:name="io.flutter.embedding.android.FlutterActivity"
-            android:theme="@style/Theme.FinikAndroidSdk"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize"
-            />
-        <activity
-            android:name="finik.android.sdk.FinikActivity"
-            android:exported="true"
-            android:theme="@style/Theme.FinikAndroidSdk" />
+<!--        <activity-->
+<!--            android:name="io.flutter.embedding.android.FlutterActivity"-->
+<!--            android:theme="@style/Theme.FinikAndroidSdk"-->
+<!--            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"-->
+<!--            android:hardwareAccelerated="true"-->
+<!--            android:windowSoftInputMode="adjustResize"-->
+<!--            />-->
+<!--        <activity-->
+<!--            android:name="finik.android.sdk.FinikActivity"-->
+<!--            android:exported="true"-->
+<!--            android:theme="@style/Theme.FinikAndroidSdk" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true"

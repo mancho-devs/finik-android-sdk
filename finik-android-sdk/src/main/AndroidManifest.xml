@@ -4,7 +4,7 @@
 
     <application>
         <activity
-            android:name=".FinikActivity"
+            android:name="kg.mancho.finik_android_sdk.FinikActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>

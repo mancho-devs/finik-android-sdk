@@ -46,18 +46,21 @@ afterEvaluate {
 //        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
     }
     tasks.named("extractDeepLinksRelease") {
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter-release.aarRelease")
+        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseRelease")
+    }
+    tasks.named("bundleDebugLocalLintAar") {
+        dependsOn("mergeJarsDebug")
     }
     tasks.named("bundleReleaseLocalLintAar") {
         dependsOn("mergeJarsRelease")
     }
 
     publishing {
-        repositories {
-            maven {
-                url = uri(layout.buildDirectory.dir("repo"))
-            }
-        }
+//        repositories {
+//            maven {
+//                url = uri(layout.buildDirectory.dir("repo"))
+//            }
+//        }
 
         publications {
             create<MavenPublication>("release") {
