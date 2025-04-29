@@ -7,10 +7,6 @@ plugins {
     id("com.github.vlsi.gradle-extensions") version "1.86"
 }
 
-// Группа и версия
-group = "io.github.mancho-devs"
-version = "1.0.0"
-
 android {
     namespace = "kg.mancho.finik_android_sdk"
     compileSdk = 34
@@ -45,15 +41,15 @@ android {
 }
 
 afterEvaluate {
-//    tasks.named("extractDeepLinksDebug") {
-//        dependsOn("explodeSdk.finik.flutter_moduleFlutter-debug.aarDebug")
-//    }
-//    tasks.named("extractDeepLinksRelease") {
-//        dependsOn("explodeSdk.finik.flutter_moduleFlutter-release.aarRelease")
-//    }
-//    tasks.named("bundleReleaseLocalLintAar") {
-//        dependsOn("mergeJarsRelease")
-//    }
+    tasks.named("extractDeepLinksDebug").configure {
+        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseDebug")
+    }
+    tasks.named("extractDeepLinksRelease") {
+        dependsOn("explodeSdk.finik.flutter_moduleFlutter-release.aarRelease")
+    }
+    tasks.named("bundleReleaseLocalLintAar") {
+        dependsOn("mergeJarsRelease")
+    }
 
     publishing {
         publications {
@@ -113,22 +109,21 @@ afterEvaluate {
 //    }
 }
 
-fataar {
-    transitive = true
-}
+//fataar {
+//    transitive = true
+//}
 
 dependencies {
-//    embed(project(":flutter"))
-//    implementation(files("libs/flutter_release-1.0.aar"))
-//    implementation("io.flutter:flutter_embedding_release:1.0.0-3.29.2")
+//    embed("sdk.finik.flutter_module:flutter_debug:1.0")
+    embed("sdk.finik.flutter_module:flutter_release:1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    debugImplementation("sdk.finik.flutter_module:flutter_debug:1.0")
-    releaseImplementation("sdk.finik.flutter_module:flutter_release:1.0")
+//    debugImplementation("sdk.finik.flutter_module:flutter_debug:1.0")
+//    releaseImplementation("sdk.finik.flutter_module:flutter_release:1.0")
 }
 
 task("assembleFatAar", type = Zip::class) {

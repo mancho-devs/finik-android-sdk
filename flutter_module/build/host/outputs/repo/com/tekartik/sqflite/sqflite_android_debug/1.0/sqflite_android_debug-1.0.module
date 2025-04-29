@@ -10,7 +10,7 @@
   },
   "createdBy": {
     "gradle": {
-      "version": "8.9"
+      "version": "8.10.2"
     }
   },
   "variants": [
@@ -104,11 +104,11 @@
         {
           "name": "sqflite_android_debug-1.0-javadoc.jar",
           "url": "sqflite_android_debug-1.0-javadoc.jar",
-          "size": 341634,
-          "sha512": "8dd8b4a3f1bfc04f653dd232b68b0d47b59ac154532bdcf693cfcead41ff7d5a68ea6c5f4d1f3fce314c47541cbc13c95e1ef5c3bd3156f1cc49b0b2e20938c0",
-          "sha256": "577feff6d6ab98689f0c788d05ca55df67ef7b3e0328baa9747cd3d9633e3e41",
-          "sha1": "0e0be68127ec673a38ec735818c0fb7f698a7e9d",
-          "md5": "5f65e45af1a55bbd6100792cef06951e"
+          "size": 341643,
+          "sha512": "c728f4de69e9aa331a603b8b4679fec3f469b7daac74b8267dcbac7c837c386b791430e1ea3bdd224b8eb5d1235c0ad9a9a71ae1531ec69fd3ebf82eb005f85e",
+          "sha256": "3c01a95b3989404c8d924329a7110fb3ce5795267e546a50af01acacc92bfa8e",
+          "sha1": "2d1c7b3a7183a7e2a94fa4be0748a4309af7f3f2",
+          "md5": "08bc4814205676683dc72889360dd233"
         }
       ]
     }
