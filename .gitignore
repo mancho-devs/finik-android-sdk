@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Разрешить repo из Flutter модуля
+!flutter_module/build/host/outputs/repo/
