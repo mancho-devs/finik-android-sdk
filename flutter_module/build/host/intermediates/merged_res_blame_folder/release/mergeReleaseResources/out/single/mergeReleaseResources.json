@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "sdk.finik.flutter_module.host.app-release-35:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "sdk.finik.flutter_module.host.app-main-25:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "sdk.finik.flutter_module.host.app-release-35:/drawable_launch_background.xml.flat",
+        "source": "sdk.finik.flutter_module.host.app-main-25:/drawable/launch_background.xml"
+    }
+]

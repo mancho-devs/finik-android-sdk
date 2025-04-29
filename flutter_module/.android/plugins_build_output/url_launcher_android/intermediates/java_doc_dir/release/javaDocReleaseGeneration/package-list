@@ -1,0 +1,10 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:io.flutter.plugins.urllauncher/Messages.BrowserOptions.Builder///PointingToDeclaration/io/flutter/plugins/urllauncher/Messages.BrowserOptions.Builder.html
+$dokka.location:io.flutter.plugins.urllauncher/Messages.BrowserOptions///PointingToDeclaration/io/flutter/plugins/urllauncher/Messages.BrowserOptions.html
+$dokka.location:io.flutter.plugins.urllauncher/Messages.FlutterError///PointingToDeclaration/io/flutter/plugins/urllauncher/Messages.FlutterError.html
+$dokka.location:io.flutter.plugins.urllauncher/Messages.UrlLauncherApi///PointingToDeclaration/io/flutter/plugins/urllauncher/Messages.UrlLauncherApi.html
+$dokka.location:io.flutter.plugins.urllauncher/Messages.WebViewOptions.Builder///PointingToDeclaration/io/flutter/plugins/urllauncher/Messages.WebViewOptions.Builder.html
+$dokka.location:io.flutter.plugins.urllauncher/Messages.WebViewOptions///PointingToDeclaration/io/flutter/plugins/urllauncher/Messages.WebViewOptions.html
+io.flutter.plugins.urllauncher
+

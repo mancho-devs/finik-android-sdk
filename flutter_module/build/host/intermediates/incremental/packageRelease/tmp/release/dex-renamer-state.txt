@@ -1,0 +1,4 @@
+#Mon Apr 28 13:00:43 KGT 2025
+base.0=/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/intermediates/dex/release/mergeDexRelease/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

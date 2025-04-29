@@ -1,0 +1,34 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<!-- Generated file. Do not edit. -->
+3<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+4    xmlns:tools="http://schemas.android.com/tools"
+5    package="sdk.finik.flutter_module" >
+6
+7    <uses-sdk android:minSdkVersion="21" />
+8
+9    <uses-permission android:name="android.permission.INTERNET" />
+9-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:5:3-64
+9-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:5:20-62
+10
+11    <application tools:node="merge" >
+11-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:6:3-16:17
+11-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:7:5-23
+12        <meta-data
+12-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:8:5-10:32
+13            android:name="flutterProjectType"
+13-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:9:7-40
+14            android:value="module" />
+14-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:10:7-29
+15        <!--
+16           Don't delete the meta-data below.
+17           It is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+18        -->
+19        <meta-data
+19-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:13:7-15:31
+20            android:name="flutterEmbedding"
+20-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:14:11-42
+21            android:value="2" />
+21-->/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/Flutter/src/main/AndroidManifest.xml:15:11-28
+22    </application>
+23
+24</manifest>

@@ -1,0 +1,31 @@
+<variant
+    name="release"
+    package="sdk.finik.flutter_module.host"
+    minSdkVersion="21"
+    targetSdkVersion="35"
+    mergedManifest="/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/intermediates/merged_manifest/release/processReleaseMainManifest/AndroidManifest.xml"
+    manifestMergeReport="/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/outputs/logs/manifest-merger-release-report.txt"
+    proguardFiles="/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/intermediates/default_proguard_files/global/proguard-android.txt-8.7.0"
+    partialResultsDir="/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/intermediates/lint_vital_partial_results/release/lintVitalAnalyzeRelease/out">
+  <buildFeatures
+      namespacing="REQUIRED"/>
+  <sourceProviders>
+    <sourceProvider
+        manifests="src/main/AndroidManifest.xml"
+        javaDirectories="src/main/java:src/release/java:src/main/kotlin:src/release/kotlin"
+        resDirectories="src/main/res:src/release/res"
+        assetsDirectories="src/main/assets:src/release/assets"/>
+  </sourceProviders>
+  <testSourceProviders>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <artifact
+      classOutputs="/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/intermediates/javac/release/compileReleaseJavaWithJavac/classes:/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/intermediates/compile_and_runtime_not_namespaced_r_class_jar/release/processReleaseResources/R.jar"
+      type="MAIN"
+      applicationId="sdk.finik.flutter_module.host"
+      generatedSourceFolders="/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/generated/ap_generated_sources/release/out"
+      generatedResourceFolders="/Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/build/host/generated/res/resValues/release"
+      desugaredMethodsFiles="/Users/k.asanov/.gradle/caches/8.10.2/transforms/3b054de7f095a03ef81bb0783250058e/transformed/D8BackportedDesugaredMethods.txt">
+  </artifact>
+</variant>

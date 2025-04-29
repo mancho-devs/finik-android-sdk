@@ -1,0 +1,7 @@
+sdk.finik.flutter_module-pngs-0 /Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/build/generated/res/pngs/release
+sdk.finik.flutter_module-resValues-1 /Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/build/generated/res/resValues/release
+sdk.finik.flutter_module-mergeReleaseResources-2 /Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+sdk.finik.flutter_module-mergeReleaseResources-3 /Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+sdk.finik.flutter_module-release-4 /Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/build/intermediates/merged_res/release/mergeReleaseResources
+sdk.finik.flutter_module-main-5 /Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/src/main/res
+sdk.finik.flutter_module-release-6 /Users/k.asanov/AndroidStudioProjects/finik-android-sdk/flutter_module/.android/src/release/res

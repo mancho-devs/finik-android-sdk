@@ -1,0 +1,7 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:com.tekartik.sqflite.operation/BatchOperation.BatchOperationResult///PointingToDeclaration/com/tekartik/sqflite/operation/BatchOperation.BatchOperationResult.html
+com.tekartik.sqflite
+com.tekartik.sqflite.dev
+com.tekartik.sqflite.operation
+

@@ -1,0 +1,7 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:io.flutter.plugins.pathprovider/Messages.FlutterError///PointingToDeclaration/io/flutter/plugins/pathprovider/Messages.FlutterError.html
+$dokka.location:io.flutter.plugins.pathprovider/Messages.PathProviderApi///PointingToDeclaration/io/flutter/plugins/pathprovider/Messages.PathProviderApi.html
+$dokka.location:io.flutter.plugins.pathprovider/Messages.StorageDirectory///PointingToDeclaration/io/flutter/plugins/pathprovider/Messages.StorageDirectory.html
+io.flutter.plugins.pathprovider
+
