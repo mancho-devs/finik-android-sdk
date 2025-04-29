@@ -1,0 +1,9 @@
+%echo Generating OpenPGP key
+Key-Type: RSA
+Key-Length: 4096
+Name-Real: Kubanych Asanov
+Name-Email: kuba@mancho.dev
+Expire-Date: 0
+Passphrase: finik-sdk
+%commit
+%echo Done

@@ -45,15 +45,15 @@ android {
 }
 
 afterEvaluate {
-    tasks.named("extractDeepLinksDebug") {
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter-debug.aarDebug")
-    }
-    tasks.named("extractDeepLinksRelease") {
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter-release.aarRelease")
-    }
-    tasks.named("bundleReleaseLocalLintAar") {
-        dependsOn("mergeJarsRelease")
-    }
+//    tasks.named("extractDeepLinksDebug") {
+//        dependsOn("explodeSdk.finik.flutter_moduleFlutter-debug.aarDebug")
+//    }
+//    tasks.named("extractDeepLinksRelease") {
+//        dependsOn("explodeSdk.finik.flutter_moduleFlutter-release.aarRelease")
+//    }
+//    tasks.named("bundleReleaseLocalLintAar") {
+//        dependsOn("mergeJarsRelease")
+//    }
 
     publishing {
         publications {
@@ -118,16 +118,17 @@ fataar {
 }
 
 dependencies {
-    embed(project(":flutter"))
-//    implementation(project(":flutter"))
+//    embed(project(":flutter"))
+//    implementation(files("libs/flutter_release-1.0.aar"))
+//    implementation("io.flutter:flutter_embedding_release:1.0.0-3.29.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-//    debugImplementation("sdk.finik.flutter_module:flutter_debug:1.0")
-//    releaseImplementation("sdk.finik.flutter_module:flutter_release:1.0")
+    debugImplementation("sdk.finik.flutter_module:flutter_debug:1.0")
+    releaseImplementation("sdk.finik.flutter_module:flutter_release:1.0")
 }
 
 task("assembleFatAar", type = Zip::class) {
