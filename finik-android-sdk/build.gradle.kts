@@ -53,6 +53,12 @@ afterEvaluate {
     }
 
     publishing {
+        repositories {
+            maven {
+                url = uri(layout.buildDirectory.dir("repo"))
+            }
+        }
+
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
