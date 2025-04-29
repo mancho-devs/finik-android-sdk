@@ -3,3 +3,16 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
 }
+
+buildscript {
+    repositories {
+        maven("https://jitpack.io") {
+            content { includeGroup("com.github.aasitnikov") }
+        }
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.github.aasitnikov:fat-aar-android:1.4.1")
+    }
+}
