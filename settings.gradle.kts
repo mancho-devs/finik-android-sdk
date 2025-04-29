@@ -15,9 +15,9 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
-        mavenCentral()
+        maven("file://$rootDir/flutter_module/build/host/outputs/repo")
         maven("https://storage.googleapis.com/download.flutter.io")
-        maven(url = "$rootDir/flutter_module/build/host/outputs/repo")
+        mavenCentral()
     }
 }
 
