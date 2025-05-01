@@ -1,11 +1,15 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     id("com.android.library")
     alias(libs.plugins.kotlin.android)
     id("com.kezong.fat-aar")
-    id("maven-publish")
-    id("signing")
-    id("com.github.vlsi.gradle-extensions") version "1.86"
+    `maven-publish`
+    id("com.vanniktech.maven.publish") version "0.31.0"
 }
+
+group = "io.github.mancho-devs"
+version = "1.0.0"
 
 android {
     namespace = "kg.mancho.finik_android_sdk"
@@ -26,8 +30,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -41,31 +44,23 @@ android {
 }
 
 afterEvaluate {
-    tasks.named("extractDeepLinksDebug").configure {
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseDebug")
-//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
-    }
-    tasks.named("extractDeepLinksRelease") {
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseRelease")
-    }
-    tasks.named("bundleDebugLocalLintAar") {
-        dependsOn("mergeJarsDebug")
-    }
-    tasks.named("bundleReleaseLocalLintAar") {
-        dependsOn("mergeJarsRelease")
-    }
+//    tasks.named("extractDeepLinksDebug").configure {
+//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseDebug")
+////        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
+//    }
+//    tasks.named("extractDeepLinksRelease") {
+//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseRelease")
+//    }
+//    tasks.named("bundleDebugLocalLintAar") {
+//        dependsOn("mergeJarsDebug")
+//    }
+//    tasks.named("bundleReleaseLocalLintAar") {
+//        dependsOn("mergeJarsRelease")
+//    }
 
     publishing {
-//        repositories {
-//            maven {
-//                url = uri(layout.buildDirectory.dir("repo"))
-//            }
-//        }
-
         publications {
             create<MavenPublication>("release") {
-                from(components["release"])
-
                 groupId = "io.github.mancho-devs"
                 artifactId = "finik-android-sdk"
                 version = "1.0.0"
@@ -96,44 +91,29 @@ afterEvaluate {
             }
         }
 
-//        repositories {
-//            maven {
-//                name = "OSSRH"
-//                url = uri(
-//                    if (version.toString().endsWith("SNAPSHOT"))
-//                        "https://s01.oss.sonatype.org/content/repositories/snapshots"
-//                    else
-//                        "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2"
-//                )
-//                credentials {
-//                    username = project.findProperty("ossrhUsername") as String?
-//                    password = project.findProperty("ossrhPassword") as String?
-//                }
-//            }
-//        }
+        repositories {
+            mavenLocal()
+            maven {
+                name = "BuildDir"
+                url = uri(rootProject.layout.buildDirectory.dir("maven-repo"))
+            }
+        }
     }
-
-//    signing {
-//        useGpgCmd()
-//        sign(publishing.publications["release"])
-//    }
 }
 
-//fataar {
-//    transitive = true
-//}
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
+}
 
 dependencies {
-//    embed("sdk.finik.flutter_module:flutter_debug:1.0")
-    embed("sdk.finik.flutter_module:flutter_release:1.0")
+    embed(libs.flutter.release)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-//    debugImplementation("sdk.finik.flutter_module:flutter_debug:1.0")
-//    releaseImplementation("sdk.finik.flutter_module:flutter_release:1.0")
 }
 
 task("assembleFatAar", type = Zip::class) {
@@ -141,3 +121,4 @@ task("assembleFatAar", type = Zip::class) {
     into("build/outputs/aar/fat/")
     include("*.aar")
 }
+
