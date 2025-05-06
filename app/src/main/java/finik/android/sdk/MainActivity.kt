@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import kg.mancho.finik_android_sdk.FinikActivity
+import kg.averspay.finik_android_sdk.FinikActivity
 
 class MainActivity : AppCompatActivity() {
 

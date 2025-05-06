@@ -1,4 +1,4 @@
-package kg.mancho.finik_android_sdk
+package kg.averspay.finik_android_sdk
 
 import org.junit.Test
 

@@ -8,12 +8,12 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.31.0"
 }
 
-group = "io.github.mancho-devs"
-version = "1.0.0"
+group = "kg.averspay"
+version = "1.0.2"
 
 android {
-    namespace = "kg.mancho.finik_android_sdk"
-    compileSdk = 34
+    namespace = "kg.averspay.finik_android_sdk"
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -44,26 +44,41 @@ android {
 }
 
 afterEvaluate {
-//    tasks.named("extractDeepLinksDebug").configure {
-//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseDebug")
-////        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
-//    }
-//    tasks.named("extractDeepLinksRelease") {
-//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseRelease")
-//    }
-//    tasks.named("bundleDebugLocalLintAar") {
-//        dependsOn("mergeJarsDebug")
-//    }
-//    tasks.named("bundleReleaseLocalLintAar") {
-//        dependsOn("mergeJarsRelease")
-//    }
+//    Debug dependencies
+    tasks.named("extractDeepLinksDebug").configure {
+        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseDebug")
+//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
+    }
+    tasks.named("extractDeepLinksRelease") {
+        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseRelease")
+    }
+    tasks.named("bundleDebugLocalLintAar") {
+        dependsOn("mergeJarsDebug")
+    }
+    tasks.named("bundleReleaseLocalLintAar") {
+        dependsOn("mergeJarsRelease")
+    }
+
+    // Release dependencies
+    tasks.matching { it.name == "publishReleasePublicationToMavenCentralRepository" }
+        .configureEach {
+            dependsOn(tasks.matching { it.name == "signReleasePublication" })
+            dependsOn(tasks.matching { it.name == "signMavenPublication" })
+        }
+    tasks.matching { it.name == "publishMavenPublicationToMavenCentralRepository" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+    }
+
+    // Also ensure signing happens before the staging+release task (used by Vanniktech)
+    tasks.matching { it.name == "publishToMavenCentral" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+    }
 
     publishing {
         publications {
             create<MavenPublication>("release") {
-                groupId = "io.github.mancho-devs"
+                from(components["release"])
                 artifactId = "finik-android-sdk"
-                version = "1.0.0"
 
                 pom {
                     name.set("Finik Android SDK")
@@ -107,13 +122,27 @@ mavenPublishing {
 }
 
 dependencies {
-    embed(libs.flutter.release)
+    implementation(
+        fileTree(
+            mapOf(
+                "dir" to "libs",
+                "include" to listOf("*.jar")
+            )
+        )
+    )
+//    You can test it in debug mode
+//    debugImplementation("sdk.finik.flutter_module:flutter_debug:1.0")
+    embed("sdk.finik.flutter_module:flutter_release:1.0") {
+        isTransitive = true
+    }
+    implementation("sdk.finik.flutter_module:flutter_release:1.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(kotlin("script-runtime"))
 }
 
 task("assembleFatAar", type = Zip::class) {

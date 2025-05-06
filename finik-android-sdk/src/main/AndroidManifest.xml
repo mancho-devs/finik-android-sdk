@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kg.mancho.finik_android_sdk">
+    package="kg.averspay.finik_android_sdk">
 
     <application>
         <activity
-            android:name="kg.mancho.finik_android_sdk.FinikActivity"
+            android:name="kg.averspay.finik_android_sdk.FinikActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>

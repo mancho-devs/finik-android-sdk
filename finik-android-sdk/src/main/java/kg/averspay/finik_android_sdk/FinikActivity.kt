@@ -1,4 +1,4 @@
-package kg.mancho.finik_android_sdk
+package kg.averspay.finik_android_sdk
 
 import android.app.Activity
 import android.content.Intent
@@ -14,7 +14,7 @@ class FinikActivity : FlutterActivity() {
 
     private lateinit var apiKey: String
     private var locale: String = "ru"
-    private var useHive: Boolean = true
+    private var useHive: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
