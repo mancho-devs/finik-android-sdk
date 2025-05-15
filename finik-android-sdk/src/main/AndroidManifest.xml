@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kg.averspay.finik_android_sdk">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application>
         <activity
             android:name="kg.averspay.finik_android_sdk.FinikActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <provider
+            android:name="kg.averspay.finik_android_sdk.FlutterInitProvider"
+            android:authorities="${applicationId}.finik_flutter_init"
+            android:exported="false" />
     </application>
 
 </manifest>

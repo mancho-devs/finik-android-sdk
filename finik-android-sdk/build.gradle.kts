@@ -3,17 +3,16 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     id("com.android.library")
     alias(libs.plugins.kotlin.android)
-    id("com.kezong.fat-aar")
-    `maven-publish`
     id("com.vanniktech.maven.publish") version "0.31.0"
 }
 
 group = "kg.averspay"
-version = "1.0.2"
+version = "1.0.6"
 
 android {
     namespace = "kg.averspay.finik_android_sdk"
     compileSdk = 35
+    ndkVersion = "27.0.12077973"
 
     defaultConfig {
         minSdk = 24
@@ -46,11 +45,11 @@ android {
 afterEvaluate {
 //    Debug dependencies
     tasks.named("extractDeepLinksDebug").configure {
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseDebug")
-//        dependsOn("explodeSdk.finik.flutter_moduleFlutter_debugDebug")
+//        dependsOn("explodeKg.averspay.flutter_moduleFlutter_releaseDebug")
+//        dependsOn("explodeKg.averspay.flutter_moduleFlutter-debug.aarDebug")
     }
     tasks.named("extractDeepLinksRelease") {
-        dependsOn("explodeSdk.finik.flutter_moduleFlutter_releaseRelease")
+        dependsOn("explodeKg.averspay.flutter_moduleFlutter_releaseRelease")
     }
     tasks.named("bundleDebugLocalLintAar") {
         dependsOn("mergeJarsDebug")
@@ -71,6 +70,12 @@ afterEvaluate {
 
     // Also ensure signing happens before the staging+release task (used by Vanniktech)
     tasks.matching { it.name == "publishToMavenCentral" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+    }
+    tasks.matching { it.name == "publishReleasePublicationToMavenLocal" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signMavenPublication" })
+    }
+    tasks.matching { it.name == "publishMavenPublicationToMavenLocal" }.configureEach {
         dependsOn(tasks.matching { it.name == "signReleasePublication" })
     }
 
@@ -112,30 +117,16 @@ afterEvaluate {
                 name = "BuildDir"
                 url = uri(rootProject.layout.buildDirectory.dir("maven-repo"))
             }
+//            maven {
+//                name = "FlutterStorage"
+//                url = uri("https://storage.googleapis.com/download.flutter.io")
+//            }
         }
     }
 }
 
-mavenPublishing {
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-    signAllPublications()
-}
-
 dependencies {
-    implementation(
-        fileTree(
-            mapOf(
-                "dir" to "libs",
-                "include" to listOf("*.jar")
-            )
-        )
-    )
-//    You can test it in debug mode
-//    debugImplementation("sdk.finik.flutter_module:flutter_debug:1.0")
-    embed("sdk.finik.flutter_module:flutter_release:1.0") {
-        isTransitive = true
-    }
-    implementation("sdk.finik.flutter_module:flutter_release:1.0")
+    implementation("kg.averspay:flutter_release:1.0.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -145,9 +136,7 @@ dependencies {
     implementation(kotlin("script-runtime"))
 }
 
-task("assembleFatAar", type = Zip::class) {
-    from("build/outputs/aar/")
-    into("build/outputs/aar/fat/")
-    include("*.aar")
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    signAllPublications()
 }
-

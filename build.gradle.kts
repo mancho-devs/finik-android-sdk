@@ -6,6 +6,7 @@ plugins {
 
 buildscript {
     repositories {
+        mavenLocal()
         maven("https://jitpack.io") {
             content { includeGroup("com.github.aasitnikov") }
         }

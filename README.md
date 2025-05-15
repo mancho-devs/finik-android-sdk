@@ -8,12 +8,13 @@
 
 ```groovy
 dependencies {
-    implementation 'com.yourcompany:finik-android-sdk:1.0.0'
+    implementation 'kg.averspay:finik-android-sdk:1.0.6'
 }
 ```
 
 ## ⚙️ Настройка
 И добавьте нужные репозитории в `settings.gradle`:
+`maven("https://storage.googleapis.com/download.flutter.io")` обязательно, так как наш SDK зависеть от Flutter [библиотеки](https://pub.dev/packages/finik_sdk) 
 
 ```dependencyResolutionManagement {
     repositories {
@@ -25,49 +26,62 @@ dependencies {
 ```
 
 ## 🚀 Использование
-Всё, что вам нужно — это запустить `FinikActivity` и передать параметры через Intent.
+Всё, что вам нужно — это запустить `FinikActivity` через `registerForActivityResult` и передать параметры через Intent.
 
 ```import android.content.Intent
 import finik.android.sdk.FinikActivity
 
-val intent = Intent(this, FinikActivity::class.java).apply {
-    putExtra("apiKey", "YOUR_API_KEY")
-    putExtra("locale", "ru")              // или "en", "ky"
-    putExtra("useHive", false)             // включить/выключить кеширование
-}
-startActivity(intent)
+private val finikLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
+
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Запуск FinikActivity из твоей SDK
+        val intent = Intent(this, FinikActivity::class.java).apply {
+            putExtra("apiKey", "YOUR_API_KEY")
+            putExtra("itemId", "YOUR_ITEM_ID")
+            putExtra("locale", "ru") - not required
+            putExtra("useHive", false) - not required
+        }
+
+        finikLauncher.launch(intent)
+    }
 ```
 
 ## 📡 Обратная связь от Finik
-`FinikActivity` отправляет Broadcast-события:
+`FinikActivity` возвращает `Activity.RESULT_OK` или `Activity.RESULT_CANCELED`:
 
-Broadcast	              Описание
-finik_onBackPressed	  Пользователь нажал назад в интерфейсе Finik
-finik_paymentSuccess	Оплата прошла успешно. Аргумент data содержит доп. информацию
-finik_paymentFailure	Оплата завершилась с ошибкой. Аргумент error содержит сообщение
+Name	                                   Описание
+RESULT_OK	          Оплата прошла успешно. Аргумент data содержит параметры `paymentResult` и `details`
+RESULT_CANCELED 	  Пользователь нажал назад в интерфейсе Finik, Аргумент data содержит параметр `isBackPressed`
+RESULT_CANCELED  	  Оплата завершилась с ошибкой. Аргумент data содержит параметры `paymentResult` и `details`
 
 Пример приёма:
-```val receiver = object : BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
-        when (intent?.action) {
-            "finik_paymentSuccess" -> {
-                val data = intent.getStringExtra("data")
-                // Обработка успеха
-            }
-            "finik_paymentFailure" -> {
-                val error = intent.getStringExtra("error")
-                // Обработка ошибки
+```
+private val finikLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                // Обработка success paymentResult
+                val data = result.data
+                val resultValue = data?.getStringExtra("paymentResult")
+                val details = data?.getStringExtra("details")
+            } else {
+                val isBackPressed = result.data?.getStringExtra("isBackPressed") == "true"
+
+                if (isBackPressed) {
+                    // Обработка кнопки назад
+                    Log.d("MainActivity", "Пользователь вышел из Finik по кнопке назад")
+                } else {
+                    // Обработка failure paymentResult
+                    val data = result.data
+                    val resultValue = data?.getStringExtra("paymentResult")
+                    val details = data?.getStringExtra("details")
+                }
             }
         }
-    }
-}
-
-// Зарегистрировать при необходимости
-registerReceiver(receiver, IntentFilter().apply {
-    addAction("finik_paymentSuccess")
-    addAction("finik_paymentFailure")
-})
 ```
+Пример `Activity` можно найти [здесь](app/src/main/java/finik/android/sdk/MainActivity.kt)
 
 © 2025 — Finik Team
 Все права защищены.

@@ -13,6 +13,7 @@ class FinikActivity : FlutterActivity() {
     private val channelName = "finik_channel"
 
     private lateinit var apiKey: String
+    private lateinit var itemId: String
     private var locale: String = "ru"
     private var useHive: Boolean = false
 
@@ -22,6 +23,7 @@ class FinikActivity : FlutterActivity() {
         // Получаем параметры из Intent
         intent?.let {
             apiKey = it.getStringExtra("apiKey") ?: ""
+            itemId = it.getStringExtra("itemId") ?: ""
             locale = it.getStringExtra("locale") ?: "ru"
             useHive = it.getBooleanExtra("useHive", false)
         }
@@ -38,6 +40,7 @@ class FinikActivity : FlutterActivity() {
                 "getFinikParams" -> {
                     val params = mapOf(
                         "apiKey" to apiKey,
+                        "itemId" to itemId,
                         "locale" to locale,
                         "useHiveForGraphQLCache" to useHive
                     )

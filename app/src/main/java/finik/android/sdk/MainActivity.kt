@@ -36,9 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         // Запуск FinikActivity из твоей SDK
         val intent = Intent(this, FinikActivity::class.java).apply {
-            putExtra("apiKey", "da2-qtfmf4xkzjeypiexb75aqxtn6u")
-            putExtra("locale", "ru")
-            putExtra("useHive", false)
+            putExtra("apiKey", "YOUR_API_KEY")
+            putExtra("itemId", "YOUR_ITEM_ID")
+//            putExtra("locale", "ru")
+//            putExtra("useHive", false)
         }
 
         finikLauncher.launch(intent)
