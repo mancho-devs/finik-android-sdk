@@ -1,4 +1,4 @@
-package kg.averspay.finik_android_sdk
+package kg.finik.android.sdk
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("kg.averspay.finik_android_sdk.test", appContext.packageName)
+        assertEquals("kg.finik.android.sdk.test", appContext.packageName)
     }
 }

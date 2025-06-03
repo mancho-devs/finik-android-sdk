@@ -37,7 +37,7 @@ void configureProject(Project project, String outputDir) {
     project.publishing {
         publications {
             release(MavenPublication) {
-                groupId = 'kg.averspay'
+                groupId = 'kg.finik'
                 artifactId = "flutter_module"
                 version = project.version
 

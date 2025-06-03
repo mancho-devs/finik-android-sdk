@@ -1,6 +1,6 @@
 # Finik Android SDK
 
-`finik-android-sdk` — это Android-библиотека, которая позволяет легко интегрировать финтех-интерфейс Finik в ваше приложение. Вся реализация UI и логики выполнена на Flutter, но вам не нужно ничего настраивать — просто вызывайте `FinikActivity`.
+`kg.finik:android-sdk` — это Android-библиотека, которая позволяет легко интегрировать финтех-интерфейс Finik в ваше приложение. Вся реализация UI и логики выполнена на Flutter, но вам не нужно ничего настраивать — просто вызывайте `FinikActivity`.
 
 ## 🔧 Установка
 
@@ -8,13 +8,14 @@
 
 ```groovy
 dependencies {
-    implementation 'kg.averspay:finik-android-sdk:1.0.6'
+    implementation 'kg.finik:android-sdk:1.1.1'
 }
 ```
 
 ## ⚙️ Настройка
+
 И добавьте нужные репозитории в `settings.gradle`:
-`maven("https://storage.googleapis.com/download.flutter.io")` обязательно, так как наш SDK зависеть от Flutter [библиотеки](https://pub.dev/packages/finik_sdk) 
+`maven("https://storage.googleapis.com/download.flutter.io")` обязательно, так как наш SDK зависеть от Flutter [библиотеки](https://pub.dev/packages/finik_sdk)
 
 ```dependencyResolutionManagement {
     repositories {
@@ -26,6 +27,7 @@ dependencies {
 ```
 
 ## 🚀 Использование
+
 Всё, что вам нужно — это запустить `FinikActivity` через `registerForActivityResult` и передать параметры через Intent.
 
 ```import android.content.Intent
@@ -50,14 +52,16 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 
 ## 📡 Обратная связь от Finik
+
 `FinikActivity` возвращает `Activity.RESULT_OK` или `Activity.RESULT_CANCELED`:
 
-Name	                                   Описание
-RESULT_OK	          Оплата прошла успешно. Аргумент data содержит параметры `paymentResult` и `details`
-RESULT_CANCELED 	  Пользователь нажал назад в интерфейсе Finik, Аргумент data содержит параметр `isBackPressed`
-RESULT_CANCELED  	  Оплата завершилась с ошибкой. Аргумент data содержит параметры `paymentResult` и `details`
+Name Описание
+RESULT_OK Оплата прошла успешно. Аргумент data содержит параметры `paymentResult` и `details`
+RESULT_CANCELED Пользователь нажал назад в интерфейсе Finik, Аргумент data содержит параметр `isBackPressed`
+RESULT_CANCELED Оплата завершилась с ошибкой. Аргумент data содержит параметры `paymentResult` и `details`
 
 Пример приёма:
+
 ```
 private val finikLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -81,8 +85,8 @@ private val finikLauncher =
             }
         }
 ```
+
 Пример `Activity` можно найти [здесь](app/src/main/java/finik/android/sdk/MainActivity.kt)
 
 © 2025 — Finik Team
 Все права защищены.
-

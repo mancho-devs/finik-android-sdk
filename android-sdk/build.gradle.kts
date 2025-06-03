@@ -3,14 +3,15 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     id("com.android.library")
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
     id("com.vanniktech.maven.publish") version "0.31.0"
 }
 
-group = "kg.averspay"
+group = "kg.finik"
 version = "1.0.6"
 
 android {
-    namespace = "kg.averspay.finik_android_sdk"
+    namespace = "kg.finik.android.sdk"
     compileSdk = 35
     ndkVersion = "27.0.12077973"
 
@@ -44,46 +45,46 @@ android {
 
 afterEvaluate {
 //    Debug dependencies
-    tasks.named("extractDeepLinksDebug").configure {
-//        dependsOn("explodeKg.averspay.flutter_moduleFlutter_releaseDebug")
-//        dependsOn("explodeKg.averspay.flutter_moduleFlutter-debug.aarDebug")
-    }
-    tasks.named("extractDeepLinksRelease") {
-        dependsOn("explodeKg.averspay.flutter_moduleFlutter_releaseRelease")
-    }
-    tasks.named("bundleDebugLocalLintAar") {
-        dependsOn("mergeJarsDebug")
-    }
-    tasks.named("bundleReleaseLocalLintAar") {
-        dependsOn("mergeJarsRelease")
-    }
-
-    // Release dependencies
-    tasks.matching { it.name == "publishReleasePublicationToMavenCentralRepository" }
-        .configureEach {
-            dependsOn(tasks.matching { it.name == "signReleasePublication" })
-            dependsOn(tasks.matching { it.name == "signMavenPublication" })
-        }
-    tasks.matching { it.name == "publishMavenPublicationToMavenCentralRepository" }.configureEach {
-        dependsOn(tasks.matching { it.name == "signReleasePublication" })
-    }
-
-    // Also ensure signing happens before the staging+release task (used by Vanniktech)
-    tasks.matching { it.name == "publishToMavenCentral" }.configureEach {
-        dependsOn(tasks.matching { it.name == "signReleasePublication" })
-    }
-    tasks.matching { it.name == "publishReleasePublicationToMavenLocal" }.configureEach {
-        dependsOn(tasks.matching { it.name == "signMavenPublication" })
-    }
-    tasks.matching { it.name == "publishMavenPublicationToMavenLocal" }.configureEach {
-        dependsOn(tasks.matching { it.name == "signReleasePublication" })
-    }
+//    tasks.named("extractDeepLinksDebug").configure {
+////        dependsOn("explodekg.finik.flutter_moduleFlutter_releaseDebug")
+////        dependsOn("explodekg.finik.flutter_moduleFlutter-debug.aarDebug")
+//    }
+//    tasks.named("extractDeepLinksRelease") {
+//        dependsOn("explodekg.finik.flutter_moduleFlutter_releaseRelease")
+//    }
+//    tasks.named("bundleDebugLocalLintAar") {
+//        dependsOn("mergeJarsDebug")
+//    }
+//    tasks.named("bundleReleaseLocalLintAar") {
+//        dependsOn("mergeJarsRelease")
+//    }
+//
+//    // Release dependencies
+//    tasks.matching { it.name == "publishReleasePublicationToMavenCentralRepository" }
+//        .configureEach {
+//            dependsOn(tasks.matching { it.name == "signReleasePublication" })
+//            dependsOn(tasks.matching { it.name == "signMavenPublication" })
+//        }
+//    tasks.matching { it.name == "publishMavenPublicationToMavenCentralRepository" }.configureEach {
+//        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+//    }
+//
+//    // Also ensure signing happens before the staging+release task (used by Vanniktech)
+//    tasks.matching { it.name == "publishToMavenCentral" }.configureEach {
+//        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+//    }
+//    tasks.matching { it.name == "publishReleasePublicationToMavenLocal" }.configureEach {
+//        dependsOn(tasks.matching { it.name == "signMavenPublication" })
+//    }
+//    tasks.matching { it.name == "publishMavenPublicationToMavenLocal" }.configureEach {
+//        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+//    }
 
     publishing {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                artifactId = "finik-android-sdk"
+                artifactId = "android-sdk"
 
                 pom {
                     name.set("Finik Android SDK")
@@ -117,16 +118,13 @@ afterEvaluate {
                 name = "BuildDir"
                 url = uri(rootProject.layout.buildDirectory.dir("maven-repo"))
             }
-//            maven {
-//                name = "FlutterStorage"
-//                url = uri("https://storage.googleapis.com/download.flutter.io")
-//            }
         }
     }
 }
 
 dependencies {
-    implementation("kg.averspay:flutter_release:1.0.2")
+    implementation("kg.finik:flutter_release:1.1.1")
+//    implementation("kg.finik.flutter_module:flutter_release:1.1.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

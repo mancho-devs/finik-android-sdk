@@ -76,7 +76,6 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 
-
   # This section identifies your Flutter project as a module meant for
   # embedding in a native host app.  These identifiers should _not_ ordinarily
   # be changed after generation - they are used to ensure that the tooling can
@@ -85,5 +84,5 @@ flutter:
   # identifiers, which may be completely independent or the same as these.
   module:
     androidX: true
-    androidPackage: kg.averspay.flutter_library
-    iosBundleIdentifier: kg.averspay.flutterLibrary
+    androidPackage: kg.finik.flutter_library
+    iosBundleIdentifier: kg.finik.flutterLibrary

@@ -3,11 +3,11 @@
 
     <application>
         <activity
-            android:name="kg.averspay.finik_android_sdk.FinikActivity"
+            android:name="kg.finik.android.sdk.FinikActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <provider
-            android:name="kg.averspay.finik_android_sdk.FlutterInitProvider"
+            android:name="kg.finik.android.sdk.FlutterInitProvider"
             android:authorities="${applicationId}.finik_flutter_init"
             android:exported="false" />
     </application>

@@ -9,7 +9,7 @@ class FinikProviderScreen extends StatefulWidget {
 }
 
 class _FinikProviderScreenState extends State<FinikProviderScreen> {
-  static const _channel = MethodChannel('finik_channel');
+  static const _channel = MethodChannel('finik_sdk_channel');
 
   String? apiKey;
   String? itemId;

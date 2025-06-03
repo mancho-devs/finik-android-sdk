@@ -1,4 +1,4 @@
-package kg.averspay.finik_android_sdk
+package kg.finik.android.sdk
 
 import org.junit.Test
 
