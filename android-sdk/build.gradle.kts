@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "kg.finik"
-version = "1.0.6"
+version = "1.1.1"
 
 android {
     namespace = "kg.finik.android.sdk"
@@ -58,27 +58,27 @@ afterEvaluate {
 //    tasks.named("bundleReleaseLocalLintAar") {
 //        dependsOn("mergeJarsRelease")
 //    }
-//
-//    // Release dependencies
-//    tasks.matching { it.name == "publishReleasePublicationToMavenCentralRepository" }
-//        .configureEach {
-//            dependsOn(tasks.matching { it.name == "signReleasePublication" })
-//            dependsOn(tasks.matching { it.name == "signMavenPublication" })
-//        }
-//    tasks.matching { it.name == "publishMavenPublicationToMavenCentralRepository" }.configureEach {
-//        dependsOn(tasks.matching { it.name == "signReleasePublication" })
-//    }
-//
-//    // Also ensure signing happens before the staging+release task (used by Vanniktech)
-//    tasks.matching { it.name == "publishToMavenCentral" }.configureEach {
-//        dependsOn(tasks.matching { it.name == "signReleasePublication" })
-//    }
-//    tasks.matching { it.name == "publishReleasePublicationToMavenLocal" }.configureEach {
-//        dependsOn(tasks.matching { it.name == "signMavenPublication" })
-//    }
-//    tasks.matching { it.name == "publishMavenPublicationToMavenLocal" }.configureEach {
-//        dependsOn(tasks.matching { it.name == "signReleasePublication" })
-//    }
+
+    // Release dependencies
+    tasks.matching { it.name == "publishReleasePublicationToMavenCentralRepository" }
+        .configureEach {
+            dependsOn(tasks.matching { it.name == "signReleasePublication" })
+            dependsOn(tasks.matching { it.name == "signMavenPublication" })
+        }
+    tasks.matching { it.name == "publishMavenPublicationToMavenCentralRepository" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+    }
+
+    // Also ensure signing happens before the staging+release task (used by Vanniktech)
+    tasks.matching { it.name == "publishToMavenCentral" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+    }
+    tasks.matching { it.name == "publishReleasePublicationToMavenLocal" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signMavenPublication" })
+    }
+    tasks.matching { it.name == "publishMavenPublicationToMavenLocal" }.configureEach {
+        dependsOn(tasks.matching { it.name == "signReleasePublication" })
+    }
 
     publishing {
         publications {
