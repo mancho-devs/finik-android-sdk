@@ -44,21 +44,6 @@ android {
 }
 
 afterEvaluate {
-//    Debug dependencies
-//    tasks.named("extractDeepLinksDebug").configure {
-////        dependsOn("explodekg.finik.flutter_moduleFlutter_releaseDebug")
-////        dependsOn("explodekg.finik.flutter_moduleFlutter-debug.aarDebug")
-//    }
-//    tasks.named("extractDeepLinksRelease") {
-//        dependsOn("explodekg.finik.flutter_moduleFlutter_releaseRelease")
-//    }
-//    tasks.named("bundleDebugLocalLintAar") {
-//        dependsOn("mergeJarsDebug")
-//    }
-//    tasks.named("bundleReleaseLocalLintAar") {
-//        dependsOn("mergeJarsRelease")
-//    }
-
     // Release dependencies
     tasks.matching { it.name == "publishReleasePublicationToMavenCentralRepository" }
         .configureEach {
@@ -123,7 +108,7 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation("kg.finik:flutter_release:1.1.1")
+    implementation("kg.finik:flutter_release:1.1.2")
 //    implementation("kg.finik.flutter_module:flutter_release:1.1.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kg.finik.android.sdk.CreateItemHandlerWidget
 import kg.finik.android.sdk.FinikActivity
 import kg.finik.android.sdk.FinikSdkLocale
+import kg.finik.android.sdk.PaymentMethod
 import kg.finik.android.sdk.RequiredField
+import kg.finik.android.sdk.TextScenario
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
             if (result.resultCode == RESULT_OK) {
                 val data = result.data
                 val paymentResultJson = data?.getStringExtra("paymentResultJson")
+                Log.d("MainActivity", "Payment result: $paymentResultJson")
                 // Обработка success или failure
             } else {
                 Log.d("MainActivity", "Пользователь вышел из Finik по кнопке назад")
@@ -39,15 +42,14 @@ class MainActivity : AppCompatActivity() {
 //                    YOUR_ITEM_NAME
                     name = "Кроссовки",
                     fixedAmount = 1200.0,
-//                    callbackUrl = TODO(),
-//                    textScenario = TextScenario.REPLENISHMENT,
                     requiredFields = listOf(RequiredField(fieldId = "orderId", value = "123"))
+//                    callbackUrl = TODO(),
                 )
             )
             putExtra("locale", FinikSdkLocale.RU as Parcelable)
             putExtra("isBeta", true)
-//            putExtra("textScenario", TextScenario.REPLENISHMENT as Parcelable)
-//            putExtra("useCacheForData", true)
+            putExtra("textScenario", TextScenario.REPLENISHMENT as Parcelable)
+            putExtra("paymentMethod", PaymentMethod.QR  as Parcelable)
         }
 
         finikLauncher.launch(intent)

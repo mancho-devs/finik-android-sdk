@@ -19,7 +19,7 @@ class FinikActivity : FlutterActivity() {
     private var isBeta: Boolean? = null
     private var locale: FinikSdkLocale? = null
     private var textScenario: TextScenario? = null
-    private var useCacheForData: Boolean? = null
+    private var paymentMethod: PaymentMethod? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class FinikActivity : FlutterActivity() {
             isBeta = it.getBooleanExtra("isBeta", false)
             locale = it.getParcelableExtra("locale", FinikSdkLocale::class.java)
             textScenario = it.getParcelableExtra("textScenario", TextScenario::class.java)
-            useCacheForData = it.getBooleanExtra("useCacheForData", false)
+            paymentMethod = it.getParcelableExtra("paymentMethod", PaymentMethod::class.java)
         }
     }
 
@@ -50,12 +50,12 @@ class FinikActivity : FlutterActivity() {
                     val params = mutableMapOf<String, Any?>()
 
                     textScenario?.toMap()?.let { params.putAll(it) }
+                    paymentMethod?.toMap()?.let { params.putAll(it) }
                     locale?.toMap()?.let { params.putAll(it) }
 
                     params += mapOf(
                         "apiKey" to apiKey,
                         "isBeta" to isBeta,
-                        "useHiveForGraphQLCache" to useCacheForData,
                         "widget" to widget.toMap()
                     )
 

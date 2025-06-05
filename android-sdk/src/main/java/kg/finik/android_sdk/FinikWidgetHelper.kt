@@ -61,8 +61,8 @@ data class RequiredField(
 
 @Parcelize
 enum class TextScenario(val rawValue: String): Parcelable {
-    PAYMENT("payment"),
-    REPLENISHMENT("replenishment");
+    PAYMENT("PAYMENT"),
+    REPLENISHMENT("REPLENISHMENT");
 
     open fun toMap(): Map<String, Any?> {
         return mapOf("textScenario" to this.rawValue)
@@ -75,7 +75,7 @@ enum class TextScenario(val rawValue: String): Parcelable {
 
 @Parcelize
 enum class FinikSdkLocale(val rawValue: String): Parcelable {
-    KG("kg"),
+    KG("ky"),
     EN("en"),
     RU("ru");
 
@@ -85,5 +85,19 @@ enum class FinikSdkLocale(val rawValue: String): Parcelable {
 
     companion object {
         fun fromRawValue(raw: String): FinikSdkLocale? = FinikSdkLocale.entries.find { it.rawValue == raw }
+    }
+}
+
+@Parcelize
+enum class PaymentMethod(val rawValue: String): Parcelable {
+    APP("APP"),
+    QR("QR");
+
+    open fun toMap(): Map<String, Any?> {
+        return mapOf("paymentMethod" to this.rawValue)
+    }
+
+    companion object {
+        fun fromRawValue(raw: String): PaymentMethod? = PaymentMethod.entries.find { it.rawValue == raw }
     }
 }
