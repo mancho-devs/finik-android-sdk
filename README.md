@@ -53,12 +53,11 @@ override fun onCreate(savedInstanceState: Bundle?) {
 //                GetItemHandlerWidget(itemId = "YOUR_ITEM_ID")
                 CreateItemHandlerWidget(
                     accountId = "72145c2f-b987-46b9-b718-5d8313854f69",
-//                    YOUR_ITEM_NAME
-                    name = "Кроссовки",
-                    fixedAmount = 2300.0,
+                    name = "Кроссовки", // YOUR_ITEM_NAME
+//                    fixedAmount = 2300.0, - not required
 //                    callbackUrl = TODO(), - not required
 //                    textScenario = TextScenario.REPLENISHMENT, - not required
-                    requiredFields = listOf(RequiredField(fieldId = "orderId", value = "123"))
+//                    requiredFields = listOf(RequiredField(fieldId = "orderId", value = "123")),  - not required
                 )
             )
             putExtra("locale", FinikSdkLocale.RU as Parcelable)
