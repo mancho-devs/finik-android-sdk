@@ -1,6 +1,6 @@
 # Finik Android SDK
 
-`kg.finik:android-sdk` — это Android-библиотека, которая позволяет легко интегрировать финтех-интерфейс Finik в ваше приложение. Вся реализация UI и логики выполнена на Flutter, но вам не нужно ничего настраивать — просто вызывайте `FinikActivity`.
+`[kg.finik:android-sdk](https://central.sonatype.com/artifact/kg.finik/android-sdk)` — это Android-библиотека, которая позволяет легко интегрировать финтех-интерфейс Finik в ваше приложение. Вся реализация UI и логики выполнена на Flutter, но вам не нужно ничего настраивать — просто вызывайте `FinikActivity`.
 
 ## 🔧 Установка
 
@@ -30,8 +30,14 @@ dependencies {
 
 Всё, что вам нужно — это запустить `FinikActivity` через `registerForActivityResult` и передать параметры через Intent.
 
-```import android.content.Intent
-import finik.android.sdk.FinikActivity
+```
+import android.content.Intent
+import kg.finik.android.sdk.CreateItemHandlerWidget
+import kg.finik.android.sdk.FinikActivity
+import kg.finik.android.sdk.FinikSdkLocale
+import kg.finik.android.sdk.PaymentMethod
+import kg.finik.android.sdk.RequiredField
+import kg.finik.android.sdk.TextScenario
 
 private val finikLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
@@ -42,9 +48,21 @@ override fun onCreate(savedInstanceState: Bundle?) {
         // Запуск FinikActivity из твоей SDK
         val intent = Intent(this, FinikActivity::class.java).apply {
             putExtra("apiKey", "YOUR_API_KEY")
-            putExtra("itemId", "YOUR_ITEM_ID")
-            putExtra("locale", "ru") - not required
-            putExtra("useHive", false) - not required
+            putExtra(
+                "widget",
+//                GetItemHandlerWidget(itemId = "YOUR_ITEM_ID")
+                CreateItemHandlerWidget(
+                    accountId = "72145c2f-b987-46b9-b718-5d8313854f69",
+//                    YOUR_ITEM_NAME
+                    name = "Кроссовки",
+                    fixedAmount = 2300.0,
+//                    callbackUrl = TODO(), - not required
+//                    textScenario = TextScenario.REPLENISHMENT, - not required
+                    requiredFields = listOf(RequiredField(fieldId = "orderId", value = "123"))
+                )
+            )
+            putExtra("locale", FinikSdkLocale.RU as Parcelable)
+            putExtra("isBeta", true)
         }
 
         finikLauncher.launch(intent)
@@ -56,9 +74,8 @@ override fun onCreate(savedInstanceState: Bundle?) {
 `FinikActivity` возвращает `Activity.RESULT_OK` или `Activity.RESULT_CANCELED`:
 
 Name Описание
-RESULT_OK Оплата прошла успешно. Аргумент data содержит параметры `paymentResult` и `details`
+RESULT_OK Оплата прошла успешно либо завершилась с ошибкой. Аргумент data содержит параметр `paymentResultJson`
 RESULT_CANCELED Пользователь нажал назад в интерфейсе Finik, Аргумент data содержит параметр `isBackPressed`
-RESULT_CANCELED Оплата завершилась с ошибкой. Аргумент data содержит параметры `paymentResult` и `details`
 
 Пример приёма:
 
@@ -66,22 +83,13 @@ RESULT_CANCELED Оплата завершилась с ошибкой. Аргу�
 private val finikLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
-                // Обработка success paymentResult
                 val data = result.data
-                val resultValue = data?.getStringExtra("paymentResult")
-                val details = data?.getStringExtra("details")
+                val paymentResultJson = data?.getStringExtra("paymentResultJson")
+                Log.d("MainActivity", "Payment result: $paymentResultJson")
+                // Обработка success или failure
             } else {
-                val isBackPressed = result.data?.getStringExtra("isBackPressed") == "true"
-
-                if (isBackPressed) {
-                    // Обработка кнопки назад
-                    Log.d("MainActivity", "Пользователь вышел из Finik по кнопке назад")
-                } else {
-                    // Обработка failure paymentResult
-                    val data = result.data
-                    val resultValue = data?.getStringExtra("paymentResult")
-                    val details = data?.getStringExtra("details")
-                }
+                Log.d("MainActivity", "Пользователь вышел из Finik по кнопке назад")
+                // Обработка кнопки назад
             }
         }
 ```
