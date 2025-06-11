@@ -1,6 +1,6 @@
 # Finik Android SDK
 
-[kg.finik:android-sdk](https://central.sonatype.com/artifact/kg.finik/android-sdk) — это Android-библиотека, которая позволяет легко интегрировать финтех-интерфейс Finik в ваше приложение. Вся реализация UI и логики выполнена на Flutter, но вам не нужно ничего настраивать — просто вызывайте `FinikActivity`.
+[kg.finik:android-sdk](https://central.sonatype.com/artifact/kg.finik/android-sdk) — это Android-библиотека, которая позволяет легко интегрировать финтех-интерфейс Finik в ваше приложение посредством `FinikActivity`.
 
 ## 🔧 Установка
 
@@ -14,8 +14,7 @@ dependencies {
 
 ## ⚙️ Настройка
 
-И добавьте нужные репозитории в `settings.gradle`:
-`maven("https://storage.googleapis.com/download.flutter.io")` обязательно, так как наш SDK зависеть от Flutter [библиотеки](https://pub.dev/packages/finik_sdk)
+Добавьте нужные репозитории в `settings.gradle`.
 
 ```dependencyResolutionManagement {
     repositories {
@@ -26,9 +25,11 @@ dependencies {
 }
 ```
 
+Flutter зависимость необходима, так как Finik Android SDK основан на библиотеке [Finik Flutter SDK](https://pub.dev/packages/finik_sdk).
+
 ## 🚀 Использование
 
-Всё, что вам нужно — это запустить `FinikActivity` через `registerForActivityResult` и передать параметры через Intent.
+Запустите `FinikActivity` через `registerForActivityResult` и передайте параметры через Intent.
 
 ```
 import android.content.Intent
@@ -45,19 +46,28 @@ private val finikLauncher =
 override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Запуск FinikActivity из твоей SDK
+        // Запуск FinikActivity
         val intent = Intent(this, FinikActivity::class.java).apply {
             putExtra("apiKey", "YOUR_API_KEY")
             putExtra(
                 "widget",
 //                GetItemHandlerWidget(itemId = "YOUR_ITEM_ID")
                 CreateItemHandlerWidget(
+                    // Обязательное поле. ID счёт бенефициара.
                     accountId = "72145c2f-b987-46b9-b718-5d8313854f69",
-                    name = "Кроссовки", // YOUR_ITEM_NAME
-//                    fixedAmount = 2300.0, - not required
-//                    callbackUrl = TODO(), - not required
-//                    textScenario = TextScenario.REPLENISHMENT, - not required
-//                    requiredFields = listOf(RequiredField(fieldId = "orderId", value = "123")),  - not required
+                    // Обязательное поле. Название товара или услуги.
+                    name = "Кроссовки", 
+                    // Необязательно поле. По умолчанию сумма становится динамичной, не фиксированной,
+                    // и обязательной для ввода покупателем вручную при оплате.
+                    fixedAmount = 2300.0,
+                    // Необязательно поле. Webhook URL, на который вы хотели бы получить сообщение
+                    // от Finik в ответ на успешный платёж.
+                    callbackUrl = TODO(),
+                    // Необязательно поле. Тип оплаты: пополнение или оплата. По умолчанию, оплата.
+                    textScenario = TextScenario.PAYMENT
+                    // Необязательно поле. Список ключей и их значений, которые вы хотите получить
+                    // обратно на указанный `callbackUrl`.
+                    requiredFields = listOf(RequiredField(fieldId = "orderId", value = "123")),
                 )
             )
             putExtra("locale", FinikSdkLocale.RU as Parcelable)
@@ -72,9 +82,10 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 `FinikActivity` возвращает `Activity.RESULT_OK` или `Activity.RESULT_CANCELED`:
 
-Name Описание
-RESULT_OK Оплата прошла успешно либо завершилась с ошибкой. Аргумент data содержит параметр `paymentResultJson`
-RESULT_CANCELED Пользователь нажал назад в интерфейсе Finik, Аргумент data содержит параметр `isBackPressed`
+|Name | Описание |
+|-----|----------|
+|RESULT_OK | Оплата прошла успешно, либо завершилась с ошибкой. Аргумент `data` содержит параметр `paymentResultJson` |
+|RESULT_CANCELED | Пользователь нажал назад в интерфейсе Finik, Аргумент `data` содержит параметр `isBackPressed` |
 
 Пример приёма:
 
@@ -93,7 +104,7 @@ private val finikLauncher =
         }
 ```
 
-Пример `Activity` можно найти [здесь](app/src/main/java/finik/android/sdk/MainActivity.kt)
+Пример `Activity` можно найти в [MainActivity.kt](app/src/main/java/finik/android/sdk/MainActivity.kt)
 
-© 2025 — Finik Team
+© 2025 Finik
 Все права защищены.
