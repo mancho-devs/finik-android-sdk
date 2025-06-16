@@ -21,18 +21,40 @@ class FinikActivity : FlutterActivity() {
     private var textScenario: TextScenario? = null
     private var paymentMethod: PaymentMethod? = null
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Получаем параметры из Intent
         intent?.let {
             apiKey = it.getStringExtra("apiKey") ?: ""
-            widget = it.getParcelableExtra("widget", FinikWidget::class.java)!!
             isBeta = it.getBooleanExtra("isBeta", false)
-            locale = it.getParcelableExtra("locale", FinikSdkLocale::class.java)
-            textScenario = it.getParcelableExtra("textScenario", TextScenario::class.java)
-            paymentMethod = it.getParcelableExtra("paymentMethod", PaymentMethod::class.java)
+            widget = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("widget", FinikWidget::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra("widget")
+            } ?: error("widget is required")
+
+            locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("locale", FinikSdkLocale::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra("locale")
+            }
+
+            textScenario = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("textScenario", TextScenario::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra("textScenario")
+            }
+
+            paymentMethod = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableExtra("paymentMethod", PaymentMethod::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                intent.getParcelableExtra("paymentMethod")
+            }
         }
     }
 
