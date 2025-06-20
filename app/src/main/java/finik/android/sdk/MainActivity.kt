@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
+import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import kg.finik.android.sdk.CreateItemHandlerWidget
@@ -30,8 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Запуск FinikActivity с SDK
         val intent = Intent(this, FinikActivity::class.java).apply {
             putExtra("apiKey", "YOUR_API_KEY")
             putExtra(
@@ -52,6 +51,14 @@ class MainActivity : AppCompatActivity() {
             putExtra("paymentMethod", PaymentMethod.QR  as Parcelable)
         }
 
-        finikLauncher.launch(intent)
+        val button = Button(this).apply {
+            text = "Открыть Finik SDK"
+            setOnClickListener {
+                // Запуск FinikActivity с SDK
+                finikLauncher.launch(intent)
+            }
+        }
+
+        setContentView(button)
     }
 }

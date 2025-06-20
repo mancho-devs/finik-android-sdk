@@ -5,6 +5,7 @@
         <activity
             android:name="kg.finik.android.sdk.FinikActivity"
             android:exported="true"
+            android:hardwareAccelerated="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <provider
             android:name="kg.finik.android.sdk.FlutterInitProvider"
