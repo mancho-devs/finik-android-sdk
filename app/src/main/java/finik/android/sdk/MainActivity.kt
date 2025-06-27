@@ -46,9 +46,13 @@ class MainActivity : AppCompatActivity() {
                 )
             )
             putExtra("locale", FinikSdkLocale.RU as Parcelable)
-            putExtra("isBeta", true)
+//            putExtra("isBeta", true)
+//            putExtra("enableShare", false)
+//            putExtra("tapableSupportButtons", false)
+            putExtra("enableAnimation", false)
             putExtra("textScenario", TextScenario.REPLENISHMENT as Parcelable)
-            putExtra("paymentMethod", PaymentMethod.QR  as Parcelable)
+            val methods = arrayOf(PaymentMethod.QR)
+            putExtra("paymentMethods", methods);
         }
 
         val button = Button(this).apply {

@@ -52,7 +52,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
                 "widget",
 //                GetItemHandlerWidget(itemId = "YOUR_ITEM_ID")
                 CreateItemHandlerWidget(
-                    accountId = "72145c2f-b987-46b9-b718-5d8313854f69",
+                    accountId = "YOUR_ACCOUNT_ID",
                     name = "Кроссовки", // YOUR_ITEM_NAME
 //                    fixedAmount = 2300.0, - not required
 //                    callbackUrl = TODO(), - not required
@@ -61,7 +61,13 @@ override fun onCreate(savedInstanceState: Bundle?) {
                 )
             )
             putExtra("locale", FinikSdkLocale.RU as Parcelable)
-            putExtra("isBeta", true)
+//            putExtra("isBeta", true)
+//            putExtra("enableShare", false)
+//            putExtra("tapableSupportButtons", false)
+//            putExtra("enableAnimation", false)
+//            putExtra("textScenario", TextScenario.REPLENISHMENT as Parcelable)
+//            val methods = arrayOf(PaymentMethod.QR)
+//            putExtra("paymentMethods", methods);
         }
 
         finikLauncher.launch(intent)

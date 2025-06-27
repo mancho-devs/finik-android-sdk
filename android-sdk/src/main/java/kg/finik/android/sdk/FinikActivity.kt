@@ -16,9 +16,12 @@ class FinikActivity : FlutterActivity() {
     private lateinit var apiKey: String
     private lateinit var widget: FinikWidget
     private var isBeta: Boolean? = null
+    private var enableShare: Boolean? = null
+    private var tapableSupportButtons: Boolean? = null
+    private var enableAnimation: Boolean? = null
     private var locale: FinikSdkLocale? = null
     private var textScenario: TextScenario? = null
-    private var paymentMethod: PaymentMethod? = null
+    private var paymentMethods: Array<PaymentMethod>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,9 @@ class FinikActivity : FlutterActivity() {
         intent?.let {
             apiKey = it.getStringExtra("apiKey") ?: ""
             isBeta = it.getBooleanExtra("isBeta", false)
+            enableShare = it.getBooleanExtra("enableShare", true)
+            tapableSupportButtons = it.getBooleanExtra("tapableSupportButtons", true)
+            enableAnimation = it.getBooleanExtra("enableAnimation", true)
             widget = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra("widget", FinikWidget::class.java)
             } else {
@@ -48,11 +54,14 @@ class FinikActivity : FlutterActivity() {
                 intent.getParcelableExtra("textScenario")
             }
 
-            paymentMethod = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra("paymentMethod", PaymentMethod::class.java)
+            paymentMethods = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent.getParcelableArrayExtra(
+                    "paymentMethods",
+                    PaymentMethod::class.java
+                )?.filterIsInstance<PaymentMethod>()?.toTypedArray()
             } else {
                 @Suppress("DEPRECATION")
-                intent.getParcelableExtra("paymentMethod")
+                intent.getParcelableArrayExtra("paymentMethods")?.filterIsInstance<PaymentMethod>()?.toTypedArray()
             }
         }
     }
@@ -69,12 +78,15 @@ class FinikActivity : FlutterActivity() {
                     val params = mutableMapOf<String, Any?>()
 
                     textScenario?.toMap()?.let { params.putAll(it) }
-                    paymentMethod?.toMap()?.let { params.putAll(it) }
+                    paymentMethods?.let { params["paymentMethods"] = it.map { it.name } }
                     locale?.toMap()?.let { params.putAll(it) }
 
                     params += mapOf(
                         "apiKey" to apiKey,
                         "isBeta" to isBeta,
+                        "enableShare" to enableShare,
+                        "tapableSupportButtons" to tapableSupportButtons,
+                        "enableAnimation" to enableAnimation,
                         "widget" to widget.toMap()
                     )
 
