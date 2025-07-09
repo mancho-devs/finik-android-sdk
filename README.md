@@ -78,7 +78,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 //            Необязательное поле. Возможность делать не кликабельным кнопки контакты.
 //            putExtra("tapableSupportButtons", false)
 //            Необязательное поле. Анимация(шиммер) до загрузки данных
-//            putExtra("enableAnimation", false)
+//            putExtra("enableShimmer", false)
 //            Необязательное поле. Тип оплаты: пополнение или оплата. По умолчанию, оплата.
 //            putExtra("textScenario", TextScenario.REPLENISHMENT as Parcelable)
 //            Необязательное поле. Список методов пополнение или оплаты

@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 //            putExtra("isBeta", true)
 //            putExtra("enableShare", false)
 //            putExtra("tapableSupportButtons", false)
-            putExtra("enableAnimation", false)
+            putExtra("enableShimmer", false)
             putExtra("textScenario", TextScenario.REPLENISHMENT as Parcelable)
             val methods = arrayOf(PaymentMethod.QR)
             putExtra("paymentMethods", methods);
