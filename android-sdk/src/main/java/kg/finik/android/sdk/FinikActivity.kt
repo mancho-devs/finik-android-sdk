@@ -18,6 +18,7 @@ class FinikActivity : FlutterActivity() {
     private var isBeta: Boolean? = null
     private var enableShare: Boolean? = null
     private var tapableSupportButtons: Boolean? = null
+    private var enableSupportButtons: Boolean? = null
     private var enableShimmer: Boolean? = null
     private var locale: FinikSdkLocale? = null
     private var textScenario: TextScenario? = null
@@ -32,6 +33,7 @@ class FinikActivity : FlutterActivity() {
             isBeta = it.getBooleanExtra("isBeta", false)
             enableShare = it.getBooleanExtra("enableShare", true)
             tapableSupportButtons = it.getBooleanExtra("tapableSupportButtons", true)
+            enableSupportButtons = it.getBooleanExtra("enableSupportButtons", true)
             enableShimmer = it.getBooleanExtra("enableShimmer", true)
             widget = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent.getParcelableExtra("widget", FinikWidget::class.java)
@@ -86,6 +88,7 @@ class FinikActivity : FlutterActivity() {
                         "isBeta" to isBeta,
                         "enableShare" to enableShare,
                         "tapableSupportButtons" to tapableSupportButtons,
+                        "enableSupportButtons" to enableSupportButtons,
                         "enableShimmer" to enableShimmer,
                         "widget" to widget.toMap()
                     )
