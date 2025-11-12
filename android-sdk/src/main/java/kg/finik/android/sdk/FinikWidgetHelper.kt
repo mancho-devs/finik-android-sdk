@@ -34,8 +34,10 @@ data class CreateItemHandlerWidget(
     val maxAvailableAmount: Double? = null,
     val requiredFields: List<RequiredField>? = null,
     val visibilityType: VisibilityType? = null,
+    val actionLabelType: ActionLabelType? = null,
     val startDate: Calendar? = null,
-    val endDate: Calendar? = null
+    val endDate: Calendar? = null,
+    val mcc: String? = null,
 ) : FinikWidget() {
     override fun toMap(): Map<String, Any?> {
         val isoFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.US);
@@ -52,7 +54,9 @@ data class CreateItemHandlerWidget(
             "maxAvailableAmount" to maxAvailableAmount,
             "startDate" to startDate?.let { isoFormatter.format(it.time) },
             "endDate" to endDate?.let { isoFormatter.format(it.time) },
-            "visibilityType" to (visibilityType ?: VisibilityType.PRIVATE).rawValue
+            "visibilityType" to (visibilityType ?: VisibilityType.PRIVATE).rawValue,
+            "actionLabelType" to actionLabelType?.rawValue,
+            "mcc" to mcc,
         )
         return if (requiredFields != null) {
             baseMap + ("requiredFields" to requiredFields.map { it.toMap() })
@@ -125,6 +129,25 @@ enum class VisibilityType(val rawValue: String) : Parcelable {
 
     companion object {
         fun fromRawValue(raw: String): VisibilityType? =
+            entries.find { it.rawValue == raw }
+    }
+}
+
+@Parcelize
+enum class ActionLabelType(val rawValue: String) : Parcelable {
+    PAY("PAY"),
+    BUY("BUY"),
+    TRANSFER("TRANSFER"),
+    REGISTER("REGISTER"),
+    JOIN("JOIN"),
+    ENROLL("ENROLL"),
+    BOOK("BOOK"),
+    DONATE("DONATE"),
+    TOP_UP("TOP_UP"),
+    SEND_KOSHUMCHA("SEND_KOSHUMCHA");
+
+    companion object {
+        fun fromRawValue(raw: String): ActionLabelType? =
             entries.find { it.rawValue == raw }
     }
 }
