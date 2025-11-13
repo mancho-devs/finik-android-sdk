@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "kg.finik"
-version = "2.7.0"
+version = "2.7.1"
 
 android {
     namespace = "kg.finik.android.sdk"
@@ -108,7 +108,7 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation("kg.finik:flutter_release:2.7.0")
+    implementation("kg.finik:flutter_release:2.7.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

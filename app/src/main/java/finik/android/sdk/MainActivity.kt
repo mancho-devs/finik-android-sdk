@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import kg.finik.android.sdk.ActionLabelType
 import kg.finik.android.sdk.CreateItemHandlerWidget
 import kg.finik.android.sdk.FinikActivity
 import kg.finik.android.sdk.FinikSdkLocale
@@ -103,6 +104,8 @@ class MainActivity : AppCompatActivity() {
                     // Необязательное поле. Webhook URL, на который вы хотели бы получить сообщение
                     // от Finik в ответ на успешный платёж.
                     callbackUrl = "https:/my/callback/url.kg",
+//                    actionLabelType = ActionLabelType.REGISTER,
+//                    mcc = "1234",
                 )
             )
             putExtra("locale", FinikSdkLocale.RU as Parcelable)

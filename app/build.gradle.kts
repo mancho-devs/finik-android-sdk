@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "finik.android.sdk"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "finik.android.sdk"
