@@ -8,7 +8,7 @@
 
 ```groovy
 dependencies {
-    implementation 'kg.finik:android-sdk:2.2.1'
+    implementation 'kg.finik:android-sdk:2.7.1'
 }
 ```
 
