@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "kg.finik"
-version = "2.7.1"
+version = "3.0.2"
 
 android {
     namespace = "kg.finik.android.sdk"
