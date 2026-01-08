@@ -14,7 +14,8 @@ pluginManagement {
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-    val storageUrl: String = System.getenv("FLUTTER_STORAGE_BASE_URL") ?: "https://storage.googleapis.com"
+    val storageUrl: String =
+        System.getenv("FLUTTER_STORAGE_BASE_URL") ?: "https://storage.googleapis.com"
     repositories {
         google()
         mavenCentral()
