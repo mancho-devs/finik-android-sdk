@@ -108,7 +108,7 @@ afterEvaluate {
 }
 
 dependencies {
-    implementation("kg.finik:flutter_release:3.0.2")
+    implementation("kg.finik:flutter_release:3.1.4")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

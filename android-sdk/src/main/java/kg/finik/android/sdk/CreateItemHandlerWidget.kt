@@ -94,7 +94,8 @@ enum class FinikSdkLocale(val rawValue: String) : Parcelable {
 @Parcelize
 enum class PaymentMethod(val rawValue: String) : Parcelable {
     APP("APP"),
-    QR("QR");
+    QR("QR"),
+    VISA("VISA");
 
     open fun toMap(): Map<String, Any?> {
         return mapOf("paymentMethod" to this.rawValue)
