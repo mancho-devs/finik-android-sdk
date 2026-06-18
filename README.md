@@ -51,6 +51,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
                 params = FinikParams(
                     apiKey = "YOUR_API_KEY",
                     isBeta = true,
+                    paymentMethods = listOf(PaymentMethod.QR, PaymentMethod.VISA),
                     widget =
 //                        GetItemHandlerWidget(parameter = ItemId("YOUR_ITEM_ID")),
                         CreateItemHandlerWidget(
@@ -93,8 +94,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
                             // Необязательное поле. Webhook URL, на который вы хотели бы получить сообщение
                             // от Finik в ответ на успешный платёж.
                             callbackUrl = "https:/my/callback/url.kg",
+                            
+                            // Необязательное поле. Текст который вы хотели бы присвоить на кнопку оплаты
                             actionLabelType = ActionLabelType.REGISTER,
-                            mcc = "1234",
                         ),
                 ),
                 callback = object : FinikCallback {
